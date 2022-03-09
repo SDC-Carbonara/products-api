@@ -9,16 +9,19 @@ const pool = new Pool({
   database: "sdcproducts",
 });
 
-// params (page, count) limit = count
 const getAllProducts = (req, res) => {
   const page = req.query.page || 1;
   const count = req.query.count || 5;
-  pool.query("SELECT * FROM products LIMIT $2 OFFSET $1", [page * count - count, count], (error, results) => {
-    if (error) {
-      throw error;
+  pool.query(
+    "SELECT * FROM products LIMIT $2 OFFSET $1",
+    [page * count - count, count],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).send(results.rows);
     }
-    res.status(200).send(results.rows);
-  });
+  );
 };
 
 const getProduct = (req, res) => {
