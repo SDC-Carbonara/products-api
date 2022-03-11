@@ -76,4 +76,3 @@ DELIMITER ','
 CSV HEADER;
 
 
--- performance, throughput, latency, and caching capability, nginx
